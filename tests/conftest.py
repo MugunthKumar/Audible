@@ -1,7 +1,26 @@
+import json
+from collections.abc import Iterator
+from pathlib import Path
+from typing import Any
+
 import pytest
-from pytest_httpx import HTTPXMock
 
 from audible.localization import LOCALE_TEMPLATES, Locale
+
+
+BASE_PATH = Path.cwd().joinpath("tests", "data")
+
+
+def get_file_with_json_extension(file_name: str) -> Path:
+    if not file_name.endswith(".json"):
+        file_name += ".json"
+    return BASE_PATH.joinpath(file_name)
+
+
+def read_file(file_name: str) -> Any:
+    file_path = get_file_with_json_extension(file_name)
+    with file_path.open("r") as f:
+        return json.load(f)
 
 
 AVAILABLE_COUNTRY_CODES = [
@@ -16,27 +35,20 @@ def all_locales(request: pytest.FixtureRequest) -> Locale:
 
 
 @pytest.fixture
-def register_response_success(httpx_mock: HTTPXMock) -> HTTPXMock:
-    httpx_mock.add_response(
-        method="POST",
-        json={"response": {"success": {}}, "request_id": "1234567890"},
-    )
-    return httpx_mock
+def register_response_success_data() -> Iterator[dict[str, Any]]:
+    yield read_file("register_success")
 
 
 @pytest.fixture
-def register_response_fail(httpx_mock: HTTPXMock) -> HTTPXMock:
-    httpx_mock.add_response(
-        status_code=403,
-        method="POST",
-        json={
-            "response": {
-                "error": {
-                    "code": "InvalidToken",
-                    "message": "One or more tokens are invalid."
-                }
-            },
-            "request_id": "1234567890"
-        },
-    )
-    return httpx_mock
+def register_response_fail_data() -> Iterator[dict[str, Any]]:
+    yield read_file("register_fail")
+
+
+@pytest.fixture
+def deregister_response_success_data() -> Iterator[dict[str, Any]]:
+    yield read_file("deregister_success")
+
+
+@pytest.fixture
+def deregister_response_fail_data() -> Iterator[dict[str, Any]]:
+    yield read_file("deregister_fail")
