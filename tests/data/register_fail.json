@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.amazon.com/auth/register",
+    "json": {
+      "requested_token_type": [
+        "bearer",
+        "mac_dms",
+        "website_cookies",
+        "store_authentication_cookie"
+      ],
+      "cookies": {
+        "website_cookies": [],
+        "domain": ".amazon.com"
+      },
+      "registration_data": {
+        "domain": "Device",
+        "app_version": "3.56.2",
+        "device_serial": "865DF703EF0F4A638998F7A1A49E5AB2",
+        "device_type": "A2CZJZGLK2JJVM",
+        "device_name": "%FIRST_NAME%%FIRST_NAME_POSSESSIVE_STRING%%DUPE_STRATEGY_1ST%Audible for iPhone",
+        "os_version": "15.0.0",
+        "software_version": "35602678",
+        "device_model": "iPhone",
+        "app_name": "Audible"
+      },
+      "auth_data": {
+        "client_id": "3836354446373033454630463441363338393938463741314134394535414232234132435a4a5a474c4b324a4a564d",
+        "authorization_code": "test_authorization_code",
+        "code_verifier": "test_code_verifier",
+        "code_algorithm": "SHA-256",
+        "client_domain": "DeviceLegacy"
+      },
+      "requested_extensions": ["device_info", "customer_info"]
+    }
+  },
+  "response": {
+    "status_code": 400,
+    "url": "https://api.amazon.com/auth/register",
+    "json": {
+      "response": {
+        "error": {
+          "code": "InvalidValue",
+          "index": "...",
+          "message": "One or more provided values are invalid."
+        }
+      },
+      "request_id": "dfc59f00-e71a-47f1-b25a-ac78398136f9"
+    }
+  }
+}

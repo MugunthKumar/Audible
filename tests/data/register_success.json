@@ -1,0 +1,124 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.amazon.com/auth/register",
+    "json": {
+      "requested_token_type": [
+        "bearer",
+        "mac_dms",
+        "website_cookies",
+        "store_authentication_cookie"
+      ],
+      "cookies": {
+        "website_cookies": [],
+        "domain": ".amazon.com"
+      },
+      "registration_data": {
+        "domain": "Device",
+        "app_version": "3.56.2",
+        "device_serial": "865DF703EF0F4A638998F7A1A49E5AB2",
+        "device_type": "A2CZJZGLK2JJVM",
+        "device_name": "%FIRST_NAME%%FIRST_NAME_POSSESSIVE_STRING%%DUPE_STRATEGY_1ST%Audible for iPhone",
+        "os_version": "15.0.0",
+        "software_version": "35602678",
+        "device_model": "iPhone",
+        "app_name": "Audible"
+      },
+      "auth_data": {
+        "client_id": "3836354446373033454630463441363338393938463741314134394535414232234132435a4a5a474c4b324a4a564d",
+        "authorization_code": "test_authorization_code",
+        "code_verifier": "test_code_verifier",
+        "code_algorithm": "SHA-256",
+        "client_domain": "DeviceLegacy"
+      },
+      "requested_extensions": ["device_info", "customer_info"]
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "url": "https://api.amazon.com/auth/register",
+    "json": {
+      "response": {
+        "success": {
+          "extensions": {
+            "device_info": {
+              "device_name": "mkb79's 1st Audible for iPhone",
+              "device_serial_number": "865DF703EF0F4A638998F7A1A49E5AB2",
+              "device_type": "A2CZJZGLK2JJVM"
+            },
+            "customer_info": {
+              "account_pool": "Amazon",
+              "user_id": "amzn1.account.HLP4WSECFFXS2KQVPVSY3I0MQAOR",
+              "home_region": "EU",
+              "name": "mkb79",
+              "given_name": "Marcel"
+            }
+          },
+          "tokens": {
+            "website_cookies": [
+              {
+                "Path": "/",
+                "Secure": "true",
+                "Value": "123-12345678-1234567",
+                "Expires": "18 Oct 2043 00:00:00 GMT",
+                "Domain": ".amazon.com",
+                "HttpOnly": "false",
+                "Name": "session-id"
+              },
+              {
+                "Path": "/",
+                "Secure": "true",
+                "Value": "123-12345678-1234567",
+                "Expires": "18 Oct 2043 00:00:00 GMT",
+                "Domain": ".amazon.com",
+                "HttpOnly": "false",
+                "Name": "ubid-acbde"
+              },
+              {
+                "Path": "/",
+                "Secure": "true",
+                "Value": "\"RsIQKJJ4ChfGTgbE1KjEQXtBZXkRe0uT\"",
+                "Expires": "18 Oct 2043 00:00:00 GMT",
+                "Domain": ".amazon.com",
+                "HttpOnly": "false",
+                "Name": "x-acbde"
+              },
+              {
+                "Path": "/",
+                "Secure": "true",
+                "Value": "\"Atza|PTLv2XOzdOc6gJJhwQ4AWq8jzcldUmM-5SXswSmjJ1q3PBTJaqheBLtS-QbKit5G7IFhUgzY8frImhNo6Aoa8Ce4vS3AgVx6OlV2DgbJ0dcA-GEUrstJVp5s-tBP2nGtvvzhlz2DaU8XBQdLFYlM2h9De0aV6NDTsiTD7FITSCQeVlQiXD6CgDfmyJxszOnbiefZAxh3EHF-xs9stVGeH6wCxboD4nReu8LGuV0JBN3c7IhavLGNHDM_EgPZkIc6e6UlDzhYF-PfSvv8s45GHxRmO8j9enW6UOK2zFmULpWaLNoH2eiS46vLUUFW0nOoCBSDuyhYG_WXfBqN6EbsqsOBFk02Ob6SwC1ph3TVwAjGO9ui1w5JcL7cu-_q3RWgLlAnm5IwhUV487Cmh6RFeid3pbuT\"",
+                "Expires": "24 Oct 2023 00:00:00 GMT",
+                "Domain": ".amazon.com",
+                "HttpOnly": "true",
+                "Name": "at-acbde"
+              },
+              {
+                "Path": "/",
+                "Secure": "true",
+                "Value": "\",Grcxk6KZGmZI8cNq7f75qLidr6cF7y7Fb4UOiwduxNT=\"",
+                "Expires": "24 Oct 2023 00:00:00 GMT",
+                "Domain": ".amazon.com",
+                "HttpOnly": "true",
+                "Name": "sess-at-acbde"
+              }
+            ],
+            "store_authentication_cookie": {
+              "cookie": "R6Lx1ppHqhuesQsJv5ti/X/0gEj9CECEABgIUxBS7ttiD72Kl6xieIbQdmMLCoDd2xBkEmdJMReuXgtAzcXnnarcme6JZMKnXuSgMYzQLYZhCICxBHZON9AgyEeJSq/bzRw/M0KIGqodPcUagkgMGJ5YHeBDGocvX9iV0hFKnUzVJpqmwarlDW=="
+            },
+            "mac_dms": {
+              "device_private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEQpBwoU1omnbd4Tm29COFerpRv74J/RzTjiT/fVVLv1+kOzRsy544e/tEc+yr\n1QYlZJEhppX8x0BwuofgoJev70iz9ZAr30Id2PaVxiKUSkNG3Bx5J0x5g1J2T5cL\n8RxzPOdwbwmqxjA9w9MdT+yshalkxtlrXcR2lBS0wOK0uAQpsxrkqXpAVc5UgtWA\nBFeKJLuqGB4l1bdYNXzD+5QyAel6+OFec3sjb6adPUQMcRYCloTAAk7epGHx3niU\n0je4hsG1MT6NBs5GdyxJah6JUJ8NXw31JZck+x7pgrhd4joRnpM4jZG6an9ACggX\n7hLpLhrGNdtGquAiAZFXiBVLq+PueJJVIYbmRwAmydIV5//+otIGuxxoy0mDmx9+\nzw/kG0x9Kuvj2GjtsC8Ar1gvEMqWqTTN+8hy+d+9iT6Wsa4sa/vk1fUOi1SXEJaj\nYtJUaOC8m7KckfV2g4PQqdWfqFIHDDLpWgrBy4mOAHcbHZTD64iAqV37iTKzgPSN\n0MMdw/vnSRDBTrsDV4L8lLFWoBOo4dRIbExE2D/45Fxv/IAZSQRdCbKb1rtFFqAK\n3RZR7Yqf9L8/bbn4oZtMVj/LjyuaYAgpZFHqtlAZ1XqGKIsKIRb8G8jUU+YF3IV+\nE2tGCffMeq0OzZ/mVRxKJYGtsej+3JuuLk1B/ysvfnZdoO4BYE/JcvDo7ecvZ8hj\nzkgwewfGh368JnyNI6NpHfRPj7xVjWvtMM+BiviT6OzVzcLZh9dwa4iYlYy12XIe\nT3c0USTJTygX8Rz8F5xuqNeodaSLnrP2obB/HVz+YJOfW25dJzkrbP8H9oHUOjuI\n5HSXJX8tjgQcXTAvXzjDQlc2W5cA5MrWiDmiuS6ifyz5gO/Gfl2fqEq9Fhwbvcz/\nyLjx21Hj+KTQ+d16njOynulQFvBcGqmuLsU394CoRboxyvttNsHjCVwihcuVRtil\nMESw8oThziMde21FkEKqwsSMiFKlCkuaJFWcC8SquV5nkZ0uqgn3hM/2+UAE8OEG\n9BKxP80GG+eIFj4G6GXHlm4RMd8S5rqaffDP/kx0o68wtVkfayCrgotB43MX01Cv\npz7e1JpCtx8sQ8+m5QHvYhEErkPY6gerNX8+wVMXxxTOrQRXtay3l0hK0PLie8zi\nmPDTrdto089qG4O9wNQkButbMF6cTKKcdjWXUagRiXFvfMpnZVuEVslaVIz7L/Gi\nnwF1As2pIRQZZxRaAyL+f2bXrT+hDJl9GAuItzuzfLKboLs2vg8fCrD0ZBRYLI7W\nldOjttYrrdNrYnsiCK82vzk7Ajqu+9B+FfGhKNxgd550yXBA0cWK+er1odi1U5Jq\n4n8esdWraHrvpJJTeVNlAR/+j+NlJ4FhpyO8uo4ko3jl1E18E5Bm8Xm11jwAs1Nv\njYjMvS4vfCgaBMCQ8P2aDHz7l/b4xF+nmH/mz/0ciSWdsEXWJD9dUHLrUiGuyCJL\niUKzMV87PIa3GQhQn/WnkTlS6ZNFdvreC9hGbaAl5TA2qL3JLdspSmfbGvOKw/rg\n+aGAoxs8pJrZfjYgDKmt05/dU2hlwAHso9Ef5DKOAZVujyYowUOh\n-----END RSA PRIVATE KEY-----\n",
+              "adp_token": "{enc:Uv4FlAUOIT7IMO9QZSMqWd8JxxRL7FLjlQKPrB+ryXN1EzPrltBIs7InebRss/CDMpW+54kvoznPBqUgB0LPVCcaGxHZ4Yaz3vaIac3N78V1REF1fvFrAaMDMRfXV8saDmzEIwV1tt/r/OiZW7DqIWmyoLks8g7tmtIxUBZzCENcmFbWUfi/4NusX0B5qLFbOWzei+arvlYHOUU2/hOWSRaXWL3m8g0HHPbV5fJt7K+p5eljTPVKIxYGiFjvNiCLja5HBCwPghXEvrS2iDuRIE1l9dV4UX7UTaYK3EOICedQdh+Y1F8sajEzei5BzA2ZDWcTa3JB+5zHR6/SFLM4ek5OJMvJX2E/xWhn1Np3Vz17Ua3+l1W3dKNVQV0XIg0biQaOwQxCDcRurKxz9Gnb4CNV74AmjM2gyt4MVTZtS0YNnGHTT7I3ZCPuWq1R0W/TlO7LvJlcfryXf6lcek5NYbOKDFPQfwPK/Rrii3gNzIpTgpZtG5gVrx5fr3tkRiDXw8AOmKWsfJTA7n8EbYFXSCgNGxwsd91Cr9ETiEw5V92AZd7V1f3Ps6yrAsE9uY1KpKMkdC8O9h9BCyKoCSxEiMhes2YEVFVG/MwCxnaFdCIgdIQmP0DMSa8Dts7R927o2kuR+zf5ZyJmvjoytb1fEQNw4zcigbMLkRtdhrxR+VPSfaAlabeUWT/M6nzlkzDrcwURKu8Rv91oNUJA6WWYbYEmuvxeUFxbruB8NEvlxnvzdTkkucBxOuOGerlBZBKgIu4hleXaQdKnvgKFmM+uTv0qcvsI5VTX41mSSqYJFxE3imhT/FxFeNUMBiYELpGybp8x6QZQ+pDQ9fsOsTEVmI9E91FWibnrwYnJiCokWmluE1Yx6V6ZG4tvtz+OCx+SE2rr9nnLiBnZlhOQ6dhS4IdGauJO8wvwo5vFH0II0NfUQRPJnGTzJ2meuyEjMSRLDR2o5T5JC90WeM83Ys9oyRud9e7DdowV32hZCNylju++pxrpIMLlGhB7XUjnXOEcBFV5bcvaCY17M9yKPUo5p58lKExcS4qkknFOpvxKZBh=}{key:ez+8mgTRVBrXX6sGAohPacP8lu1JyypYm3RKXriTKLUQNzClCliRIwqU3PMxxtW/mafHD0nbODzDOw3sPkKl+22It3ZNQ9r4uvUo21ggf33tUVdiqJ8gkrW/8txsfIz8xHp2FtFp18TlM5xCgeRDoZTxpfGFslLxQxUSfp18jHPfYUsqKeJt9Icm1Jvc0Nke7prWa56u1rSVuJdagUNQ4S0cz+2s3ynDIMX1M7iw5GwICqHLRSbs9DP5prTmgTj9XbrEQnj09bCrgTFedku7I12FT74E73kAoa6qZ3U8gm95hC9bvf59WEfpo1ue34d1KWEL0Os+u9PipbiQlIdx5C==}{iv:BYbsmy3s/vUCmQqNJiK5fx==}{name:iegFEX5WOZznUafn5ig2gns4ZBpC}{serial:Mg==}"
+            },
+            "bearer": {
+              "access_token": "Atna|EwICIIgGU6Jd9LaGzer-2JOIYaNyuRCEXoKJOaUIGwJNj7f78phriQms9787A6JJJy7VhgM21g1Oq6zwj7wQzWq0hv2_6jRWnrz22z5VnCL3HoaTQbH-m_4-AxtiDbkYsRp44hvoIuu_BbNTle-kAtnQnvd7bcunE2iB_K-4I_tZqL3iJcozJpYgjvf9czf-2DFovkG0_lD_FiA7vJqgtnXGbNSJLjniGrJt_6uJFX4zOXU9ah5sFszqSHyVRYMmvboik0jgY0-KvcHKii6mIK0n2cOaexljVoHl4dJw06LEM6LZGxzInKfQ5ZqI5hYXIwfFFbCSkX0Mf0FuGlVubenEjW7fQis_WwS67KdTNosplAiCNbe_yGlBhybfVfK3GSpVE6s6o-2R7VtqLBchrvMEcRI",
+              "refresh_token": "Atnr|EwICIIVKFFWTDHzfK0T7kiCsJ1PTxL39XB_1AhWmIyAdVgUwuMiyKGAV2AMd7BO8eOThbU7BmjV9S9nGIq0ymDt2-5RWxTCrRkcyPszacluwk2l_C0ljkFxGClLqSqGF9eIqo5H6JHFEd4312Y1MSzpv6bHHdlayB7EJEUMeUKWGDzr56g48Gl7gsGups5TDV74rdzMKIbxTJNQnQ8jxZOVCu43L7iadeRhmqxWWqwZKem7s6cvTXsz1CBTbJ_eXGAEGk9qhjAwoYVpDOfGUInmcoCCvympB-4nXZPIiWETeb8d1AH0bd8-uhetEGNIOYD-RwzIPWjjEFx30f0c-ZEx3jQ9mbWBclnhUq-4_R52VV_OosIGmSlfSa60wa_HTIsfS1opG3Yyhe4ckca5GCXXvUeNx",
+              "expires_in": "3600"
+            }
+          },
+          "customer_id": "amzn1.account.HLP4WSECFFXS2KQVPVSY3I0MQAOR"
+        }
+      },
+      "request_id": "dfc59f00-e71a-47f1-b25a-ac78398136f9"
+    }
+  }
+}

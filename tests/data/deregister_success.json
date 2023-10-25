@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.amazon.com/auth/deregister",
+    "json": { "deregister_all_existing_accounts": "..." },
+    "header": { "Authorization": "Bearer ..." }
+  },
+  "response": {
+    "status_code": 200,
+    "url": "https://api.amazon.com/auth/deregister",
+    "json": {
+      "response": { "success": {} },
+      "request_id": "dfc59f00-e71a-47f1-b25a-ac78398136f9"
+    }
+  }
+}
