@@ -184,6 +184,15 @@ class AESCipher:
         self.salt_marker = salt_marker
         self.kdf_iterations = kdf_iterations
 
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        else:
+            return False
+
+    def __ne__(self, other: Any) -> bool:
+        return not self.__eq__(other)
+
     def _encrypt(self, data: str) -> tuple[bytes, bytes, bytes]:
         header, salt = create_salt(self.salt_marker, self.kdf_iterations)
         key = derive_from_pbkdf2(

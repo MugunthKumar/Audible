@@ -1,5 +1,6 @@
 import logging
 import re
+from typing import Any
 
 import httpx
 from httpcore import ConnectError
@@ -160,6 +161,15 @@ class Locale:
             f"Locale class for domain: {self.domain}, "
             f"marketplace: {self.market_place_id}"
         )
+
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        else:
+            return False
+
+    def __ne__(self, other: Any) -> bool:
+        return not self.__eq__(other)
 
     def to_dict(self) -> dict[str, str]:
         return {
