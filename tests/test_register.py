@@ -1,5 +1,4 @@
 from typing import Any
-from unittest.mock import ANY
 
 import pytest
 from pytest_httpx import HTTPXMock
