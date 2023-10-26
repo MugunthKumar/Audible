@@ -58,7 +58,10 @@ def test_register_fail(
 ) -> None:
     httpx_response = register_response_fail_data["response"]
 
-    httpx_mock.add_response(status_code=httpx_response["status_code"])
+    httpx_mock.add_response(
+        status_code=httpx_response["status_code"],
+        json=httpx_response["json"],
+    )
     with pytest.raises(Exception):
         register(
             "...",
@@ -112,6 +115,9 @@ def test_deregister_fail(
     """Test the deregister function."""
     httpx_response = deregister_response_fail_data["response"]
 
-    httpx_mock.add_response(status_code=httpx_response["status_code"])
+    httpx_mock.add_response(
+        status_code=httpx_response["status_code"],
+        json=httpx_response["json"],
+    )
     with pytest.raises(Exception):
         deregister("...", "com")
