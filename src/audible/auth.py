@@ -14,7 +14,6 @@ from typing import (
 )
 
 import httpx
-import rsa
 from httpx import Cookies
 
 from .activation_bytes import get_activation_bytes as get_ab
@@ -34,6 +33,34 @@ if TYPE_CHECKING:
 
 
 logger = logging.getLogger("audible.auth")
+
+
+try:
+    from Crypto.Hash import SHA256  # type: ignore[import-not-found]
+    from Crypto.PublicKey import RSA  # type: ignore[import-not-found]
+    from Crypto.Signature import pkcs1_15  # type: ignore[import-not-found]
+
+    logger.debug("Using PyCryptodome for RSA Signing")
+
+    class RsaSigner:
+        def __init__(self, key: str):
+            _key = RSA.import_key(key)
+            self._cipher = pkcs1_15.new(_key)
+
+        def sign(self, message: bytes) -> Any | bytes:
+            h = SHA256.new(message)
+            return self._cipher.sign(h)
+except ImportError:
+    import rsa
+
+    logger.debug("Using pyrsa for RSA Signing")
+
+    class RsaSigner:  # type: ignore[no-redef]
+        def __init__(self, key: str):
+            self._cipher = rsa.PrivateKey.load_pkcs1(key.encode("utf-8"))
+
+        def sign(self, message: bytes) -> bytes:
+            return rsa.pkcs1.sign(message, self._cipher, "SHA-256")
 
 
 def refresh_access_token(
@@ -179,7 +206,11 @@ def user_profile_audible(access_token: str, domain: str) -> dict[str, Any]:
 
 
 def sign_request(
-    method: str, path: str, body: bytes, adp_token: str, private_key: str
+    method: str,
+    path: str,
+    body: bytes,
+    adp_token: str,
+    private_key: RsaSigner | str,
 ) -> dict[str, str]:
     """Helper function who creates signed headers for http requests.
 
@@ -188,7 +219,7 @@ def sign_request(
         method: The http request method (GET, POST, DELETE, ...).
         body: The http message body.
         adp_token: The adp token obtained after a device registration.
-        private_key: The rsa key obtained after device registration.
+        private_key: The rsa key obtained after device registration or a RsaSigner instance.
 
     Returns:
         A dict with the signed headers.
@@ -196,11 +227,14 @@ def sign_request(
     date = datetime.now(timezone.utc).isoformat("T") + "Z"
     str_body = body.decode("utf-8")
 
-    data = f"{method}\n{path}\n{date}\n{str_body}\n{adp_token}"
+    data = f"{method}\n{path}\n{date}\n{str_body}\n{adp_token}".encode()
 
-    key = rsa.PrivateKey.load_pkcs1(private_key.encode("utf-8"))
-    cipher = rsa.pkcs1.sign(data.encode(), key, "SHA-256")
-    signed_encoded = base64.b64encode(cipher)
+    if isinstance(private_key, str):
+        cipher = RsaSigner(private_key)
+    else:
+        cipher = private_key
+    ciphertext = cipher.sign(data)
+    signed_encoded = base64.b64encode(ciphertext)
 
     signature = f"{signed_encoded.decode()}:{date}"
 
@@ -249,6 +283,7 @@ class Authenticator(httpx.Auth):
     requires_request_body: bool = True
     _forbid_new_attrs: bool = True
     _apply_test_convert: bool = True
+    _rsa_cipher: RsaSigner | None = None
 
     def __setattr__(self, attr: str, value: Any) -> None:
         if self._forbid_new_attrs and not hasattr(self, attr):
@@ -521,12 +556,15 @@ class Authenticator(httpx.Auth):
         if self.adp_token is None or self.device_private_key is None:
             raise Exception("No signing data found.")
 
+        if self._rsa_cipher is None:
+            self._rsa_cipher = RsaSigner(self.device_private_key)
+
         headers = sign_request(
             method=request.method,
             path=request.url.raw_path.decode(),
             body=request.content,
             adp_token=self.adp_token,
-            private_key=self.device_private_key,
+            private_key=self._rsa_cipher,
         )
 
         request.headers.update(headers)
