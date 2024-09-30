@@ -36,31 +36,52 @@ logger = logging.getLogger("audible.auth")
 
 
 try:
-    from Crypto.Hash import SHA256  # type: ignore[import-not-found]
-    from Crypto.PublicKey import RSA  # type: ignore[import-not-found]
-    from Crypto.Signature import pkcs1_15  # type: ignore[import-not-found]
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import padding
+    from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
 
-    logger.debug("Using PyCryptodome for RSA Signing")
+    logger.debug("Using cryptography for RSA Signing")
 
     class RsaSigner:
-        def __init__(self, key: str):
-            _key = RSA.import_key(key)
-            self._cipher = pkcs1_15.new(_key)
+        def __init__(self, key: str) -> None:
+            _key = cast(
+                RSAPrivateKey, serialization.load_pem_private_key(key.encode(), None)
+            )
+            self._cipher = _key
 
         def sign(self, message: bytes) -> Any | bytes:
-            h = SHA256.new(message)
-            return self._cipher.sign(h)
+            return self._cipher.sign(
+                message,
+                padding.PKCS1v15(),
+                hashes.SHA256(),
+            )
 except ImportError:
-    import rsa
+    try:
+        from Crypto.Hash import SHA256
+        from Crypto.PublicKey import RSA
+        from Crypto.Signature import pkcs1_15
 
-    logger.debug("Using pyrsa for RSA Signing")
+        logger.debug("Using PyCryptodome for RSA Signing")
 
-    class RsaSigner:  # type: ignore[no-redef]
-        def __init__(self, key: str):
-            self._cipher = rsa.PrivateKey.load_pkcs1(key.encode("utf-8"))
+        class RsaSigner:  # type: ignore[no-redef]
+            def __init__(self, key: str) -> None:
+                _key = RSA.import_key(key)
+                self._cipher = pkcs1_15.new(_key)
 
-        def sign(self, message: bytes) -> bytes:
-            return rsa.pkcs1.sign(message, self._cipher, "SHA-256")
+            def sign(self, message: bytes) -> Any | bytes:
+                h = SHA256.new(message)
+                return self._cipher.sign(h)
+    except ImportError:
+        import rsa
+
+        logger.debug("Using pyrsa for RSA Signing")
+
+        class RsaSigner:  # type: ignore[no-redef]
+            def __init__(self, key: str) -> None:
+                self._cipher = rsa.PrivateKey.load_pkcs1(key.encode("utf-8"))
+
+            def sign(self, message: bytes) -> bytes:
+                return rsa.pkcs1.sign(message, self._cipher, "SHA-256")
 
 
 def refresh_access_token(
