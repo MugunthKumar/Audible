@@ -2274,9 +2274,10 @@ tests-binary-strict = ["cmake (==3.21.2)", "cmake (==3.25.0)", "ninja (==1.10.2)
 tests-strict = ["pytest (==4.6.0)", "pytest (==6.2.5)", "pytest-cov (==3.0.0)"]
 
 [extras]
-crypto = ["pycryptodome"]
+cryptography = ["cryptography"]
+pycryptodome = ["pycryptodome"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "d5e7a179bf358d4540cd35ecc6d0df6fbe4935384745d42b5d12758bc537e931"
+content-hash = "96c398f657dfa9a66efb4fbcb67fc5b0b54ed82e4387f3c3b13705de40b61551"
