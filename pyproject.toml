@@ -36,10 +36,12 @@ httpx = ">=0.23.3"
 pbkdf2 = ">=1.3"
 pyaes = ">=1.6.1"
 rsa = ">=4.9"
+cryptography = { version = ">=43.0.1", optional = true }
 pycryptodome = { version = ">=3.20", optional = true }
 
 [tool.poetry.extras]
-crypto = ["pycryptodome"]
+cryptography = ["cryptography"]
+pycryptodome = ["pycryptodome"]
 
 [tool.poetry.group.dev.dependencies]
 Pygments = ">=2.10.0"
